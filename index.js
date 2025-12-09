@@ -38,3 +38,12 @@ for (const file of fs.readdirSync(eventsPath)) {
 }
 
 client.login(process.env.TOKEN);
+
+// --- KEEP-ALIVE SERVER FOR RAILWAY ---
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => res.send("JKValley Staff Bot is running."));
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Keep-alive server running on port " + (process.env.PORT || 3000));
+});
