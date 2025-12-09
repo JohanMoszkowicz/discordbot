@@ -1,3 +1,13 @@
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => res.send("OK"));
+app.head("/", (req, res) => res.status(200).end());
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Keep-alive server running");
+});
+
 require('dotenv').config();
 
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
@@ -47,3 +57,4 @@ for (const file of fs.readdirSync(eventsPath)) {
 }
 
 client.login(process.env.TOKEN);
+
