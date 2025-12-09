@@ -1,0 +1,13 @@
+{
+  "name": "jkvalley-staffbot",
+  "version": "1.0.0",
+  "description": "Staff bot voor JKValley met banlog modal.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "node deploy-commands.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1"
+  }
+}
