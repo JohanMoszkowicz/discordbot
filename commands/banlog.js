@@ -5,7 +5,7 @@ module.exports = {
         .setName('banlog')
         .setDescription('Open een formulier om een banlog in te vullen.'),
 
-    async execute(interaction) {
+    async execute(interaction, client) {
         const modal = new ModalBuilder()
             .setCustomId('banlog_modal')
             .setTitle('Ban Log Formulier');
@@ -38,7 +38,7 @@ module.exports = {
             new ActionRowBuilder().addComponents(playerName),
             new ActionRowBuilder().addComponents(discordId),
             new ActionRowBuilder().addComponents(reason),
-            new ActionRowBuilder().addComponents(evidence),
+            new ActionRowBuilder().addComponents(evidence)
         );
 
         await interaction.showModal(modal);
