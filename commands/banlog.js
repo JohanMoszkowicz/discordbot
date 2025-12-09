@@ -41,6 +41,7 @@ module.exports = {
             new ActionRowBuilder().addComponents(evidence)
         );
 
-        await interaction.showModal(modal);
+        // IMPORTANT FIX
+        return interaction.showModal(modal);
     }
 };
