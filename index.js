@@ -20,24 +20,62 @@ const client = new Client({
 client.commands = new Collection();
 client.modals = new Collection();
 
-// --- Load commands ---
+// -------------------------------------------
+// 🔍 LOAD COMMANDS
+// -------------------------------------------
+console.log("🔎 Loading commands...");
 const commandsPath = path.join(__dirname, 'commands');
 for (const file of fs.readdirSync(commandsPath)) {
+    console.log(" → Found command file:", file);
     const command = require(`./commands/${file}`);
+
+    if (!command?.data?.name) {
+        console.log(" ⚠️  Skipped file (missing command name):", file);
+        continue;
+    }
+
+    console.log("   ✔ Loaded command:", command.data.name);
     client.commands.set(command.data.name, command);
 }
 
-// --- Load modals ---
+console.log("📌 Commands registered:", [...client.commands.keys()]);
+
+// -------------------------------------------
+// 🔍 LOAD MODALS
+// -------------------------------------------
+console.log("\n🔎 Loading modals...");
 const modalsPath = path.join(__dirname, 'modals');
 for (const file of fs.readdirSync(modalsPath)) {
+    console.log(" → Found modal file:", file);
     const modal = require(`./modals/${file}`);
+
+    if (!modal?.customId) {
+        console.log(" ⚠️  Skipped file (missing customId):", file);
+        continue;
+    }
+
+    console.log("   ✔ Loaded modal:", modal.customId);
     client.modals.set(modal.customId, modal);
 }
 
-// --- Load events ---
+console.log("📌 Modals registered:", [...client.modals.keys()]);
+
+// -------------------------------------------
+// 🔍 LOAD EVENTS
+// -------------------------------------------
+console.log("\n🔎 Loading events...");
 const eventsPath = path.join(__dirname, 'events');
 for (const file of fs.readdirSync(eventsPath)) {
+    console.log(" → Found event file:", file);
     const event = require(`./events/${file}`);
+
+    if (!event?.name) {
+        console.log(" ⚠️  Skipped file (missing event name):", file);
+        continue;
+    }
+
+    console.log("   ✔ Loaded event:", event.name);
+
     if (event.once) {
         client.once(event.name, (...args) => event.execute(...args, client));
     } else {
@@ -45,4 +83,7 @@ for (const file of fs.readdirSync(eventsPath)) {
     }
 }
 
+console.log("🎉 Events registered!");
+
+// LOGIN
 client.login(process.env.TOKEN);
