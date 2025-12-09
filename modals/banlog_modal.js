@@ -3,6 +3,9 @@ module.exports = {
 
     async execute(interaction, client) {
 
+        // Direct defer reply zodat Discord geen error gooit
+        await interaction.deferReply({ ephemeral: true });
+
         const name = interaction.fields.getTextInputValue('playerName');
         const id = interaction.fields.getTextInputValue('discordId');
         const reason = interaction.fields.getTextInputValue('reason');
@@ -24,9 +27,8 @@ module.exports = {
 
         await logChannel.send({ embeds: [embed] });
 
-        await interaction.reply({
-            content: 'Banlog succesvol verstuurd! ✅',
-            ephemeral: true
+        await interaction.editReply({
+            content: 'Banlog succesvol verstuurd! ✅'
         });
     }
 }
