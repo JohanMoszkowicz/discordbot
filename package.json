@@ -6,9 +6,11 @@
   "scripts": {
     "start": "node index.js",
     "deploy": "node deploy-commands.js"
+    "postdeploy": "npm run deploy"
   },
 "dependencies": {
   "discord.js": "^14.14.1",
   "dotenv": "^16.4.5"
   }
 }
+
